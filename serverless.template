@@ -1,0 +1,45 @@
+{
+  "Description": "Simple app service.",
+  "Resources": {
+    "GetUser": {
+      "Type": "AWS::Serverless::Function",
+      "Properties": {
+        "Handler": "com.misonet.serverless.demo.function.GetUser",
+        "Runtime" : "java8",
+        "CodeUri" : "./target/app-1.0-SNAPSHOT.war",
+        "Policies": [
+          "AmazonS3ReadOnlyAccess"
+        ],
+        "Events": {
+          "GetResource": {
+            "Type": "Api",
+            "Properties": {
+              "Path": "/users",
+              "Method": "get"
+             }
+            }
+          }
+        }
+      },
+     "PostUser": {
+      "Type": "AWS::Serverless::Function",
+      "Properties": {
+        "Handler": "com.misonet.serverless.demo.function.PostUser",
+        "Runtime" : "java8",
+        "CodeUri" : "./target/app-1.0-SNAPSHOT.war",
+        "Policies": [
+          "AmazonS3FullAccess"
+        ],
+        "Events": {
+          "PutResource": {
+            "Type": "Api",
+            "Properties": {
+              "Path": "/",
+              "Method": "post"
+            }
+          }
+        }
+      }
+     }
+   }
+}
